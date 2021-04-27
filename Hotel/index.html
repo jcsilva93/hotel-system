@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Hotel</title>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="style.css">
+	<link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Advent+Pro" rel="stylesheet">
+	<script src="jquery-3.4.1.js"></script>
+	<script src="script.js"></script>
+</head>
+<body>
+	<div class="master">
+
+		<header>			
+			<h1>Hotel<button class="bMenu">Menu</button></h1>
+		</header>
+
+		<div class="menu_lateral">
+			<h1 class="cabeçalho">Menu</h1>
+			<ul>
+				<button id="l0" class="ativo" onclick="$('.home').show(), $('.hospedes, .cadastrar, .funcionarios, .fornecedores, .sobre').hide(), $('#l1, #l2, #l3, #l4').removeClass('ativo'), $('#l1, #l2, #l3, #l4').addClass('inativo'), $('#l0').addClass('ativo')">Home</button>
+
+				<button id="l1" class="inativo" onclick="$('.cadastrar').show(), $('.hospedes, .home, .funcionarios, .fornecedores, .sobre').hide(), $('#l0, #l2, #l3, #l4').removeClass('ativo'), $('#l0, #l2, #l3, #l4').addClass('inativo'), $('#l1').addClass('ativo')">Cadastrar</button>
+
+				<button id="l2" class="inativo" onclick="$('.hospedes').show(), $('.cadastrar, .home, .funcionarios, .fornecedores, .sobre').hide(), $('#l0, #l1, #l3, #l4').removeClass('ativo'), $('#l0, #l1, #l3, #l4').addClass('inativo'), $('#l2').addClass('ativo')">Hóspedes</button>
+
+				<button id="l3" class="inativo" onclick="$('.funcionarios').show(), $('.cadastrar, .home, .hospedes, .fornecedores, .sobre').hide(), $('#l0, #l1, #l2, #l4').removeClass('ativo'), $('#l0, #l1, #l2, #l4').addClass('inativo'), $('#l3').addClass('ativo')">Funcionários</button>
+
+				<button id="l4" class="inativo" onclick="$('.fornecedores').show(), $('.cadastrar, .home, .hospedes, .sobre, .funcionarios').hide(), $('#l0, #l1, #l2, #l3').removeClass('ativo'), $('#l0, #l1, #l2, #l3').addClass('inativo'), $('#l4').addClass('ativo')">Fornecedores</button>
+
+			</ul>
+		</div>
+
+		<div class="home">
+			<h1 class="cabeçalho"><button class="bMenu">Menu</button>Home</h1> 
+			<div class="corpo">
+				<fieldset>
+						<legend>Bem Vindo</legend>
+						<p>Sistema para gerenciamento de Hotel.</p>
+						<p>Sistema feito com o intuito de facilitar o gerenciamento de hóspedes, funcionários e fornecedores.</p>
+				</fieldset>
+				<fieldset>
+					<legend>Informações Gerais</legend><br>
+					<p>Total de Hóspedes: <b id="tt">0</b></p><br>
+					<p>Total de Funcionários: <b id="tfu">0</b></p><br>
+					<p>Total de Fornecedores: <b id="tf">0</b></p><br>	
+				</fieldset>
+			</div>			
+		</div>
+
+		<div class="cadastrar">
+			<h1 class="cabeçalho"><button class="bMenu">Menu</button>Cadastrar</h1> 
+			<div class="corpo">
+				<form onsubmit="salvar(), alert('Feito')">
+					<fieldset>
+						<legend>Informações Gerais</legend><br>
+						<label for = nome>Nome: <input type="text" id ="nome" name="nome" required pattern="[a-zA-Z]{3,}" title="Entre com mais de três letras" placeholder="Entre com um nome">
+						<label for = sobrenome>Sobrenome: <input id="sobrenome" required pattern="[a-zA-Z]{3,}" title="Entre com mais de três letras" type="text" name="sobrenome" placeholder="Entre com um sobrenome">
+						<label for = sexo>Sexo: <select id="sexo" name="sexo" required>
+							<option>Masculino</option>
+							<option>Feminino</option>
+						</select><br><br>
+					</fieldset>
+					<fieldset>
+						<legend>Informações de Contato</legend><br>
+						<label for = endereço>CEP: <input id="endereço" type="text" pattern="[0-9]{8,}" required title="Entre com 8 números " name="endereço" placeholder="xxxxxxxx"><br><br>
+						<label for = telefone>Telefone: <input id="telefone" type="text" required name="telefone" pattern="[0-9]{9,}" required title="Entre com 9 números " placeholder="xxxxxxxxx"><br><br>
+						<label for = email>Email: <input id="email" type="email" required name="email" placeholder="xxx@xxx.xxx"><br><br>
+					</fieldset>
+					<fieldset>
+						<legend>Informações de Entrada</legend><br>
+						<label for = datae>Data de Entrada: <input id="datae" type="date" required name="datae">
+						<label for = datas>Data de Saída: <input id="datas" type="date" required name="datas"><br><br>
+					</fieldset>
+						<input id="botao_cadastrar" value="Cadastrar" type="submit">
+						<input id="botao_limpar" value="Limpar" type="reset"><br><br>
+				</form>
+			</div>
+		</div>
+
+		<div class="hospedes">
+			<h1 class="cabeçalho"><button class="bMenu">Menu</button>Hóspedes</h1>
+			<div class="corpo">
+				<table>
+					<thead>
+						<tr>
+							<th>Nome</th>
+							<th>Sobrenome</th>
+							<th>Sexo</th>
+							<th>CEP</th>
+							<th>Telefone</th>
+							<th>Email</th>
+						</tr>
+					</thead>
+					<tbody id="tb">	
+
+					</tbody>
+				</table>
+			</div>
+		</div>
+
+		<div class="funcionarios">
+			<h1 class="cabeçalho"><button class="bMenu">Menu</button>Funcionários</h1>
+			<div class="corpo">
+				<div class="tableF">
+					<table>
+						<thead>
+							<tr>
+								<th>Nome</th>
+								<th>Telefone</th>
+								<th>Função</th>
+							</tr>
+						</thead>
+						<tbody id="tabelaFuncionarios">
+
+						</tbody>
+					</table>
+				</div>
+				<fieldset>
+					<legend>Cadastrar Novo Funcionário</legend>
+					<form onsubmit="salvarFuncionario(), alert('Feito!')">
+						Nome: <input type="text" required id="nomeFu" pattern="[a-zA-Z]{3,}" title="Entre com mais de três letras" placeholder="Entre com um nome">
+						Telefone: <input type="text" required id="telefoneFu" pattern="[0-9]{9,}" required title="Entre com números 9 números " placeholder="xxxxxxxxx">
+						Função: <select id="tipoFu" required>
+							<option>Faxineiro</option>
+							<option>Cozinheiro</option>
+							<option>Recepcionista</option>
+							<option>Porteiro</option>
+						</select><br>
+						<button type="submit">Cadastrar</button> <button type="reset">Limpar</button>
+					</form>
+				</fieldset>
+		
+			</div>
+		</div>
+
+		<div class="fornecedores">
+			<h1 class="cabeçalho"><button class="bMenu">Menu</button>Fornecedores</h1>
+			<div class="corpo">
+				<div class="tableF">
+				<table>
+					<thead>
+						<tr>
+							<th>Nome</th>
+							<th>Telefone</th>
+							<th>Tipo</th>
+						</tr>
+					</thead>
+					<tbody id="tabelaFornecedor">	
+
+					</tbody>
+				</table>
+				</div>
+				<fieldset>
+				<legend>Cadastrar Novo Fornecedor</legend>
+				<form onsubmit="salvarFornecedor(), alert('Feito!')">
+					Empresa: <input type="text" required id="nomeF" placeholder="Nome da empresa">
+					Telefone: <input type="text" required id="telefoneF" pattern="[0-9]{9,}" required title="Entre com números 9 números " placeholder="xxxxxxxxx">
+					Tipo: <select id="tipoF"required>
+							<option>Gás</option>
+							<option>Comida</option>
+							<option>Água</option>
+							<option>Energia</option>
+							</select><br>
+					<button type="submit">Cadastrar</button> <button type="reset">Limpar</button>
+				</form>
+				</fieldset>
+			</div>
+		</div>
+</div>
+</body>
+<script>
+
+	var f = false;
+
+	$(document).ready(function () {
+		mostra();
+		addFornecedor();
+		addFuncionario();
+		$('.cadastrar').hide();
+		$('.hospedes').hide();
+		$('.funcionarios').hide();
+		$('.fornecedores').hide();
+		$('.sobre').hide();
+
+		$(window).on('resize', function () {
+			var win = $(this);
+			if (win.width() >= 1024) {
+				f = false;
+				$('.menu_lateral').slideDown();
+			}
+			if (win.width() <= 1024) {
+				$('.menu_lateral').slideUp();
+			}
+		});
+
+		$('.bMenu').click(function () {
+			f = true;
+			$('.menu_lateral').slideToggle();
+		});
+
+
+		$('#l0, #l1, #l2, #l3, #l4, #l5').click(function () {
+			if(f == true){
+				$('.menu_lateral').slideUp();
+			}
+			f = false;
+		});
+	});
+</script>
+
+</html>
